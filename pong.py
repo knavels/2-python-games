@@ -4,6 +4,7 @@
 # Part 2: Game Objects
 # Part 3: Moving the Paddles
 # Part 4: Moving the ball
+# Part 5: Colliding with the paddles
 
 import turtle
 
@@ -95,3 +96,12 @@ while True:
     if ball.xcor() < -390:
         ball.goto(0, 0) # back to the center
         ball.dx *= -1   # change the direction if reach the right
+
+    # Paddle and ball collisions
+    if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 50 and ball.ycor() > paddle_b.ycor() - 50):
+        ball.setx(340)
+        ball.dx *= -1
+
+    if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < paddle_a.ycor() + 50 and ball.ycor() > paddle_a.ycor() - 50):
+        ball.setx(-340)
+        ball.dx *= -1
