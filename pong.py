@@ -5,6 +5,7 @@
 # Part 3: Moving the Paddles
 # Part 4: Moving the ball
 # Part 5: Colliding with the paddles
+# Part 6: Scoring
 
 import turtle
 
@@ -13,6 +14,10 @@ wn.title("Pong by Knavels")
 wn.bgcolor("black")
 wn.setup(width=800, height=600)
 wn.tracer(0)    # this will stop refreshing and updating the screen until we do it manually
+
+# Score
+score_a = 0
+score_b = 0
 
 # everything is a Turtle object
 # Paddle A
@@ -42,6 +47,16 @@ ball.penup()    # stop drawing at the point we where
 ball.goto(0, 0)  # go to the center of the screen
 ball.dx = .1     # delta x .1 pixels
 ball.dy = .1     # delta y .1 pixels
+
+# Pen
+pen = turtle.Turtle()
+pen.speed(0)
+pen.color("white")
+pen.penup()
+pen.hideturtle()
+pen.goto(0, 260)
+pen.write("Player A: 0  Player B: 0", align="center", font=("Courier", 24, "normal"))
+
 
 # Functions
 def paddle_a_up():
@@ -92,10 +107,16 @@ while True:
     if ball.xcor() > 390:
         ball.goto(0, 0) # back to the center
         ball.dx *= -1   # change the direction if reach the right
+        score_a += 1
+        pen.clear()
+        pen.write("Player A: {}  Player B: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
 
     if ball.xcor() < -390:
         ball.goto(0, 0) # back to the center
-        ball.dx *= -1   # change the direction if reach the right
+        ball.dx *= -1   # change the direction if reach the left
+        score_b += 1
+        pen.clear()
+        pen.write("Player A: {}  Player B: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
 
     # Paddle and ball collisions
     if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 50 and ball.ycor() > paddle_b.ycor() - 50):
