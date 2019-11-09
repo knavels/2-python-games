@@ -2,7 +2,8 @@
 # Based on course by @TokyoEdTech
 # Part 1: Getting Started
 # Part 2: Game Objects
-# Part3: Moving the Paddles
+# Part 3: Moving the Paddles
+# Part 4: Moving the ball
 
 import turtle
 
@@ -38,6 +39,8 @@ ball.shape("square")
 ball.color("white")
 ball.penup()    # stop drawing at the point we where
 ball.goto(0, 0)  # go to the center of the screen
+ball.dx = .1     # delta x .1 pixels
+ball.dy = .1     # delta y .1 pixels
 
 # Functions
 def paddle_a_up():
@@ -71,3 +74,24 @@ wn.onkeypress(paddle_b_down, "Down")     # when key "Down" is pressed run paddle
 # Main game loop
 while True:
     wn.update() # every time the loop runs this update the screen
+
+    # move the ball
+    ball.setx(ball.xcor() + ball.dx)
+    ball.sety(ball.ycor() + ball.dy)
+
+    # border checking
+    if ball.ycor() > 290:
+        ball.sety(290)
+        ball.dy *= -1   # change the direction if reach the top
+
+    if ball.ycor() < -290:
+        ball.sety(-290)
+        ball.dy *= -1   # change the direction if reach the bottom
+
+    if ball.xcor() > 390:
+        ball.goto(0, 0) # back to the center
+        ball.dx *= -1   # change the direction if reach the right
+
+    if ball.xcor() < -390:
+        ball.goto(0, 0) # back to the center
+        ball.dx *= -1   # change the direction if reach the right
