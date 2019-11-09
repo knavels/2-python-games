@@ -33,6 +33,9 @@ class snake(object):
     def addCube(self, surface):
         pass
 
+    def draw(self, surface):
+        pass
+
 def drawGrid(w, rows, surface):
     pass
 
