@@ -2,6 +2,7 @@
 # Based on course by @TokyoEdTech
 # Part 1: Getting Started
 # Part 2: Game Objects
+# Part3: Moving the Paddles
 
 import turtle
 
@@ -37,6 +38,35 @@ ball.shape("square")
 ball.color("white")
 ball.penup()    # stop drawing at the point we where
 ball.goto(0, 0)  # go to the center of the screen
+
+# Functions
+def paddle_a_up():
+    y = paddle_a.ycor()
+    y += 20
+    paddle_a.sety(y)
+
+def paddle_a_down():
+    y = paddle_a.ycor()
+    y -= 20
+    paddle_a.sety(y)
+
+def paddle_b_up():
+    y = paddle_b.ycor()
+    y += 20
+    paddle_b.sety(y)
+
+def paddle_b_down():
+    y = paddle_b.ycor()
+    y -= 20
+    paddle_b.sety(y)
+
+# Keyboard Binding
+wn.listen()     # listen for keyboard inputs
+wn.onkeypress(paddle_a_up, "w")     # when key "w" is pressed run paddle_a_up
+wn.onkeypress(paddle_a_down, "s")     # when key "s" is pressed run paddle_a_down
+wn.onkeypress(paddle_b_up, "Up")     # when key "Up" is pressed run paddle_b_up
+wn.onkeypress(paddle_b_down, "Down")     # when key "Down" is pressed run paddle_b_down
+
 
 # Main game loop
 while True:
